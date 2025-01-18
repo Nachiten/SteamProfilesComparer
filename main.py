@@ -2,7 +2,8 @@ import requests
 import json
 
 # Replace this with your Steam Web API key
-STEAM_API_KEY = "<steam_api_key>"
+STEAM_API_KEY = "<api_key>"
+# To create api key, go to https://steamcommunity.com/dev/apikey
 
 # Base URL for the Steam Web API
 STEAM_API_BASE_URL = "https://api.steampowered.com"
@@ -94,6 +95,10 @@ def main():
 
         users.append(userAndGame[0])
         usersGames.append(userAndGame[1])
+
+    if len(users) < 1:
+        print("Please enter at least one user to compare games.")
+        return
 
     # Create a new list, which contains all games, filtering by 'appid', where they are the present in all the lists inside usersGames
     common_game_ids = set(game['appid'] for game in usersGames[0])
